@@ -1,5 +1,27 @@
-
+/**
+ * Utility class for unit test.
+ * pase command line arguments for execute mongodb server.
+ * serverargs("[--auth] [--port port_number]")
+ * clientargs("[--auth] [--port port_number]")
+ * 
+ */
 public class Args {
+
+	public static String getServerPath() {
+		def mongod = '/usr/bin/mongod'
+		if (System.getProperty("mongod.path") != null) {
+			mongod = System.getProperty("mongod.path")
+		}
+		return mongod
+	}
+	
+	public static String getClientPath() {
+		def mongo = '/usr/bin/mongo'
+		if (System.getProperty("mongo.path") != null) {
+			mongo = System.getProperty("mongo.path")
+		}
+		return mongo
+	}
 
 	public static String serverargs(String [] args) {
 		return parseArgs(args, true)

@@ -1,7 +1,7 @@
 def scriptFile = getClass().protectionDomain.codeSource.location.path
 def scriptDir = new File(scriptFile).parent
 
-def mongo = '/usr/bin/mongo'
+def mongo = Args.getClientPath()
 
 def eval = " --eval 'db.getSisterDB(\"admin\").shutdownServer();'"
 def otherargs = Args.clientargs(args)

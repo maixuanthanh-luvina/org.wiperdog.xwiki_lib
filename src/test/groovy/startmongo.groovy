@@ -2,7 +2,7 @@
 def scriptFile = getClass().protectionDomain.codeSource.location.path
 def scriptDir = new File(scriptFile).parent
 
-def mongod = '/usr/bin/mongod'
+def mongod = Args.getServerPath()
 
 def pidfilepath = scriptDir + '/run/mongod.pid'
 def logpath =  scriptDir + '/log/mongod.log'
