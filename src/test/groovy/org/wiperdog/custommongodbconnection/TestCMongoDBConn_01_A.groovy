@@ -29,9 +29,9 @@ public class TestCMongoDBConn_01_A {
 	private final String [] args = ["--auth"]
 	static {
 		String [] nullargs = []
-		startmongo.main(nullargs)
-		createuserauth.main()
-		stopmongo.main(nullargs)
+		Startmongo.main(nullargs)
+		Createuserauth.main()
+		Stopmongo.main(nullargs)
 
 	}
 	public TestCMongoDBConn_01() {
@@ -40,13 +40,13 @@ public class TestCMongoDBConn_01_A {
 	@Before
 	public void startup() {
 		assumeTrue(mongdbpresent);
-		startmongo.main(args)
+		Startmongo.main(args)
 	}
 	
 	@After
 	public void shutdown() {
 		assumeTrue(mongdbpresent);
-		stopmongo.main(args)
+		Stopmongo.main(args)
 	}
 	
 	/**

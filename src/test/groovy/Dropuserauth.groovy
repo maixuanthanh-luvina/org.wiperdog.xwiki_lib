@@ -4,20 +4,14 @@ def scriptDir = new File(scriptFile).parent
 
 def mongo = Args.getClientPath()
 
-def port = ""
-if (args.length > 0 && args[0].toInteger() > 1000) {
-	port = args[0]
-}
+def subargs = Args.parseArgs2Array(args, false)
 
 // def userInfo = "{ user: '" + User.username + "', password: '" + User.password + "', roles: ['userAdminAnyDatabase'] }"
-def userInfo = "'" + User.username + "', '" + User.password + "'"
-def eval = "db.getSisterDB('admin').addUser(" + userInfo + ");"
 
-def admincmd
-if (port != "") 
-	admincmd = [mongo, "--port", port, "--eval", eval]
-else
-	admincmd = [mongo, "--eval", eval]
+def eval = "\"db.getSisterDB('admin').removeUser('" + User.username + "');\""
+
+def admincmd = [mongo, "--eval", eval]
+admincmd.addAll(subargs)
 
 println admincmd
 

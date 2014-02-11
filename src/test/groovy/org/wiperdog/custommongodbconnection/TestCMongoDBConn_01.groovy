@@ -33,13 +33,13 @@ public class TestCMongoDBConn_01 {
 	@Before
 	public void startup() {
 		assumeTrue(mongdbpresent);
-		startmongo.main(args)
+		Startmongo.main(args)
 	}
 	
 	@After
 	public void shutdown() {
 		assumeTrue(mongdbpresent);
-		stopmongo.main(args)
+		Stopmongo.main(args)
 	}
 	
 	/**

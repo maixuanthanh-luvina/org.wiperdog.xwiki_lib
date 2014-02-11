@@ -20,9 +20,11 @@ dbpath = " --dbpath " + dbpath
 
 def startupcmd = mongod + pidfilepath  + dbpath + logpath + fork + otherargs
 
+println "Starting up mongod..."
 println startupcmd
 
 def proc = startupcmd.execute()
 proc.waitFor()
 
 println proc.text
+Thread.sleep(2000)
