@@ -11,10 +11,12 @@ public class Args {
 	 * determine the path to the mongo server.
 	 * @return
 	 */
-	public static String getServerPath() {
+	public static String getServerPath(remote) {
 		def mongod = '/usr/bin/mongod'
-		if (System.getProperty("mongod.path") != null) {
-			mongod = System.getProperty("mongod.path")
+		if (remote) {
+			if (System.getProperty("mongodb.path") != null) {
+				mongod = System.getProperty("mongodb.path") + "/bin/mongod"
+			}
 		}
 		return mongod
 	}
@@ -23,10 +25,12 @@ public class Args {
 	 * determine the path to the mongo client.
 	 * @return
 	 */
-	public static String getClientPath() {
+	public static String getClientPath(remote) {
 		def mongo = '/usr/bin/mongo'
-		if (System.getProperty("mongo.path") != null) {
-			mongo = System.getProperty("mongo.path")
+		if (remote) {
+			if (System.getProperty("mongodb.path") != null) {
+				mongo = System.getProperty("mongodb.path") + "/bin/mongo"
+			}
 		}
 		return mongo
 	}
@@ -98,6 +102,33 @@ public class Args {
 		def rarray = parseArgs2Array(args, isServer)
 		return rarray.join(" ")
 		
+	}
+	
+	/**
+	 * run command with ProcessBuider
+	 * @param listCmd list command
+	 * @param dir directory of project
+	 * @param waitFor 
+	 * @return
+	 */
+	public static String runProcClosure(listCmd,dir,waitFor){
+		def output = [:]
+		ProcessBuilder builder = new ProcessBuilder(listCmd);
+		builder.redirectErrorStream(true);
+		builder.directory(dir);
+		Process p = builder.start();
+		if(waitFor){
+			output['exitVal'] = p.waitFor()
+		}
+		InputStream procOut  = p.getInputStream();
+		BufferedReader br = new BufferedReader(new InputStreamReader(procOut))
+		def line = null
+		StringBuffer stdin = new StringBuffer()
+		while((line = br.readLine()) != null){
+			stdin.append(line + "\n")
+		}
+		output["message"] = stdin.toString()
+		return output["message"]
 	}
 }
 

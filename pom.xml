@@ -63,15 +63,20 @@
 				<version>2.16</version>
 				<configuration>
 					<!-- <skipTests>true</skipTests>-->
-					<includes>
-						<include>**/*UT*.java</include>
-					</includes>
-					<excludes>
+					<sources>
+						<fileset>
+							<directory>${pom.basedir}/src/test/groovy</directory>
+							<includes>
+								<include>**/Test*.groovy</include>
+							</includes>
+						</fileset>
+					</sources>
+					<!-- <excludes>
 						<exclude>**/ConsoleServiceLib_UT_02.java</exclude>
 						<exclude>**/CMongoDBConn_UT_*.java</exclude>
 						<exclude>**/CMongoDBConn_UT_02.java</exclude>
 						<exclude>**/CMongoDBConn_UT_03.java</exclude>
-					</excludes>
+					</excludes> -->
 				</configuration>
 			</plugin>
 			<plugin>

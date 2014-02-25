@@ -14,7 +14,7 @@ import java.util.Set;
 import org.wiperdog.custommongodbconnection.CMongoDBConn;
 
 public class TestUTCommon {
-	static String param_file_path = "tmp\\conf_Standard.params";
+	static String param_file_path = "tmp/conf_Standard.params";
 
 	public static CMongoDBConn createNewConnectionForTest() {
 		CMongoDBConn conn = new CMongoDBConn();
